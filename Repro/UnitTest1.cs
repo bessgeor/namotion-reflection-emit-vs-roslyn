@@ -33,14 +33,14 @@ namespace Repro
             var debuggerBrowsableAttrCtor =
                 typeof(DebuggerBrowsableAttribute).GetConstructor(new[] {typeof(DebuggerBrowsableState)});
             var nullableContextAttrCtor =
-                typeof(Nullability)
+                typeof(Tests)
                     .Assembly
                     .DefinedTypes
                     .First(x => x.Name == "NullableContextAttribute")
                     .DeclaredConstructors
                     .Single();
             var nullableAttrCtor =
-                typeof(Nullability)
+                typeof(Tests)
                     .Assembly
                     .DefinedTypes
                     .First(x => x.Name == "NullableAttribute")
