@@ -116,6 +116,8 @@ namespace Repro
                 var emitProp = emit.GetProperty(prop, BindingFlags.Instance | BindingFlags.Public);
                 var codeProp = code.GetProperty(prop, BindingFlags.Instance | BindingFlags.Public);
                 AssertAttributes(emitProp!.CustomAttributes, codeProp!.CustomAttributes);
+                AssertAttributes(emitProp.GetMethod!.CustomAttributes, codeProp.GetMethod!.CustomAttributes);
+                AssertAttributes(emitProp.SetMethod!.CustomAttributes, codeProp.SetMethod!.CustomAttributes);
             }
 
             var codeFields = code
@@ -144,9 +146,9 @@ namespace Repro
             foreach (var prop in propNames)
             {
                 var emitProp = emit.GetProperty(prop, BindingFlags.Instance | BindingFlags.Public)
-                    .ToContextualProperty();
+                    !.ToContextualProperty();
                 var codeProp = code.GetProperty(prop, BindingFlags.Instance | BindingFlags.Public)
-                    .ToContextualProperty();
+                    !.ToContextualProperty();
                 Assert.That(emitProp.Nullability, Is.EqualTo(Nullability.Unknown));
                 Assert.That(codeProp.Nullability, Is.EqualTo(Nullability.Nullable));
             }
